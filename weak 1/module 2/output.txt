@@ -1,0 +1,22 @@
+0
+1
+2
+3
+4
+5
+
+
+level print
+0- level - 0
+1- level - 1
+2- level - 2
+3- level - 2
+4- level - 3
+5- level - 3
+
+
+path printing 
+0
+1
+2
+5
