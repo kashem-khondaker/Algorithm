@@ -45,7 +45,7 @@ void dijkstra(ll src)
             ll childCost = child.second;
 
            
-            if (parent_cost + childCost < dis[childNode]) 
+            if (parent_cost != INF && parent_cost + childCost < dis[childNode]) 
             {
                 dis[childNode] = parent_cost + childCost;
                 pq.push({childNode, dis[childNode]});
@@ -76,7 +76,7 @@ int main()
         cin >> src >> dest;
 
         
-        for (int i = 1; i <= n; i++) 
+        for (int i = 0; i < n; i++) 
         {
             dis[i] = INF;
         }
