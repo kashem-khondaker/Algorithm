@@ -9,11 +9,12 @@ int main()
     ll n, e;
     cin >> n >> e;
     
-    vector<vector<ll>> adj(n, vector<ll>(n, INF));
+    ll adj[n + 1][n + 1]; // Use n + 1 to handle 1-based indexing
         
-    for (int i = 0; i < n; i++)
+    // Initialize the adjacency matrix
+    for (int i = 1; i <= n; i++)
     {
-        for (int j = 0; j < n; j++)
+        for (int j = 1; j <= n; j++)
         {
             if (i == j)
             {
@@ -26,11 +27,11 @@ int main()
         }
     }
     
+    // Read edges
     while (e--) 
     {
         int a, b, w;
         cin >> a >> b >> w;
-        a--, b--; 
 
         if (w < adj[a][b]) 
         {
@@ -38,13 +39,14 @@ int main()
         }  
     }
     
-    for (int k = 0; k < n; k++)
+    // Floyd-Warshall algorithm
+    for (int k = 1; k <= n; k++)
     {
-        for (int i = 0; i < n; i++)
+        for (int i = 1; i <= n; i++)
         {
-            for (int j = 0; j < n; j++)
+            for (int j = 1; j <= n; j++)
             {
-                if (adj[i][k] + adj[k][j] < adj[i][j])
+                if (adj[i][k] < INF && adj[k][j] < INF && adj[i][k] + adj[k][j] < adj[i][j])
                 {
                     adj[i][j] = adj[i][k] + adj[k][j];
                 }
@@ -52,14 +54,13 @@ int main()
         }
     }
 
-    
+    // Answer queries
     int t;
     cin >> t;
     while (t--) 
     {
         int x, y;
         cin >> x >> y;
-        x--, y--; 
         
         if (adj[x][y] == INF) 
         {
