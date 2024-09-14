@@ -4,51 +4,37 @@ using namespace std;
 
 const int N = 1e5+5;
 const long long int INF = 1e18+5;
-vector<pair<ll, ll>> v[N];
-ll dis[N];
 
-class cmp 
+class Edge
 {
 public:
-    bool operator()(pair<ll, ll> a, pair<ll, ll> b) 
+    int u, v, c;
+    Edge(int u, int v, int c)
     {
-        return a.second > b.second;
+        this->u = u;
+        this->v = v;
+        this->c = c;
     }
 };
 
+vector<Edge> edges;
+ll dis[N];
 
-void dijkstra(ll src) 
+void bellman_ford(ll src, ll n) 
 {
-    
-    priority_queue<pair<ll, ll>, vector<pair<ll, ll>>, cmp> pq;
-    pq.push({src, 0});
+    for (int i = 0; i < n + 5; i++) 
+    {
+        dis[i] = INF;
+    }
     dis[src] = 0;
 
-    while (!pq.empty()) 
+    for (int i = 0; i < n - 1; i++) 
     {
-        pair<ll, ll> parent = pq.top();
-        pq.pop();
-        
-        ll parent_node = parent.first;
-        ll parent_cost = parent.second;
-
-        
-        if (parent_cost > dis[parent_node]) 
+        for (const auto& edge : edges) 
         {
-            continue;
-        }
-
-       
-        for (pair<ll, ll> child : v[parent_node]) 
-        {
-            ll childNode = child.first;
-            ll childCost = child.second;
-
-           
-            if (parent_cost != INF && parent_cost + childCost < dis[childNode]) 
+            if (dis[edge.u] != INF && dis[edge.u] + edge.c < dis[edge.v]) 
             {
-                dis[childNode] = parent_cost + childCost;
-                pq.push({childNode, dis[childNode]});
+                dis[edge.v] = dis[edge.u] + edge.c;
             }
         }
     }
@@ -59,12 +45,11 @@ int main()
     ll n, e;
     cin >> n >> e;
 
-    
     while (e--) 
     {
         ll a, b, c;
         cin >> a >> b >> c;
-        v[a].push_back({b, c});
+        edges.emplace_back(a, b, c);
     }
 
     int q;
@@ -75,16 +60,8 @@ int main()
         int src, dest;
         cin >> src >> dest;
 
-        
-        for (int i = 0; i < n; i++) 
-        {
-            dis[i] = INF;
-        }
+        bellman_ford(src, n);
 
-        
-        dijkstra(src);
-
-        
         if (dis[dest] == INF) 
         {
             cout << "-1" << endl;  
