@@ -2,14 +2,14 @@
 #define ll long long int
 
 using namespace std;
-const  int N = 1e5 ;
-const ll INF = 1e18;
+const  int N = 1e5 + 5 ;
+const ll INF = 1e18 + 5;
 ll dis[N];
 
 class Edge {
 public:
-    int u, v, c;
-    Edge( int u,  int v, int c) 
+    ll u, v, c;
+    Edge( ll u,  ll v, ll c) 
     {
         this->u = u;
         this->v = v;
@@ -20,12 +20,12 @@ public:
 
 int main() 
 {
-    int n, e;
+    ll n, e;
     cin >> n >> e;
     vector<Edge> EdgeList;
     while (e--) 
     {
-        int u, v, c;
+        ll u, v, c;
         cin >> u >> v >> c;
         EdgeList.push_back(Edge(u, v, c));
     }
@@ -35,7 +35,7 @@ int main()
         dis[i] = INF;
     }
 
-    long long int src;
+    ll src;
     cin >> src;
     dis[src] = 0;
 
@@ -43,9 +43,9 @@ int main()
     {
         for (Edge ed : EdgeList) 
         {
-            int u = ed.u;
-            int v = ed.v;
-            int c = ed.c;
+            ll u = ed.u;
+            ll v = ed.v;
+            ll c = ed.c;
             
             if (dis[u] != INF && dis[u] + c < dis[v]) 
             {
@@ -58,9 +58,9 @@ int main()
     
     for (Edge ed : EdgeList) 
     {
-        int u = ed.u;
-        int v = ed.v;
-        int c = ed.c;
+        ll u = ed.u;
+        ll v = ed.v;
+        ll c = ed.c;
     
         if (dis[u] != INF && dis[u] + c < dis[v]) 
         {
@@ -81,7 +81,7 @@ int main()
         cin >> t;
         while (t--) 
         {
-            int D;
+            ll D;
             cin >> D;
     
             if (dis[D] == INF) 
