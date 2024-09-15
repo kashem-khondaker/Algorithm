@@ -1,65 +1,53 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-const int N = 1e5;
-vector<pair<int,int> > adjlist[N];
-int dis[N];
-class cmp
+class Edge
 {
 public:
-    bool operator()(pair<int, int> a, pair<int, int> b)
+    int u, v, c;
+    Edge(int u, int v, int c)
     {
-        return a.second > b.second;
+        this->u = u;
+        this->v = v;
+        this->c = c;
     }
 };
 
-void djkstra(int src)
-{
-    priority_queue<pair<int,int>,vector<pair<int,int>>, cmp> pq;
-    pq.push({src,0});
-    dis[src] = 0 ;
-
-    while (!pq.empty())
-    {
-        pair<int,int> parent = pq.top();
-        pq.pop();
-
-        int parent_node = parent.first;
-        int parent_cost = parent.second;
-
-        for (pair<int,int> child :  adjlist[parent_node])
-        {
-            int child_node = child.first;
-            int child_cost = child.second;
-
-            if (parent_cost + child_cost < dis[child_node])
-            {
-                dis[child_node] = parent_cost + child_cost;
-                pq.push({child_node,dis[child_node]});
-            }   
-        }   
-    }   
-}
+const int N = 1e5 + 5;
+int dis[N];
 
 int main()
 {
-    int n , e;
+    int n, e;
     cin >> n >> e;
+    vector<Edge> EdgeList;
     while (e--)
     {
-        int a , b , c;
-        cin >> a >> b >> c;
-        adjlist[a].push_back({b,c});
-        adjlist[b].push_back({a,c});
+        int u, v, c;
+        cin >> u >> v >> c;
+        EdgeList.push_back(Edge(u, v, c));
     }
     for (int i = 0; i < n; i++)
     {
         dis[i] = INT_MAX;
     }
-    djkstra(1);
-    for (int i = 0; i < n; i++)
+    dis[1] = 0;
+    for (int i = 1; i <= n - 1; i++)
     {
-        cout << i << " -> " << dis[i] << endl;
+        for (Edge ed : EdgeList)
+        {
+            int u, v, c;
+            u = ed.u;
+            v = ed.v;
+            c = ed.c;
+            if (dis[u] < INT_MAX && dis[u] + c < dis[v])
+            {
+                dis[v] = dis[u] + c;
+            }
+        }
     }
+    for (int i = 0; i < n; i++)
+        cout << i << " -> " << dis[i] 
+        << endl;
     return 0;
 }
