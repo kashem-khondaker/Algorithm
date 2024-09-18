@@ -10,6 +10,8 @@ void initialize(int n) {
     }
     par[1] = 3;
     par[2] = 1;
+    par[5] = 6;
+    par[6] = 7;
 }
 
 // naive verson
@@ -31,7 +33,7 @@ int find(int node) {
     return leader;
 }
 
-void dau_union(int node1 , int node2)
+void dsu_union(int node1 , int node2)
 {
     int leader1 = find(node1);
     int leader2 = find(node2);
@@ -39,12 +41,10 @@ void dau_union(int node1 , int node2)
 }
 
 int main() {
-    initialize(5);
-    cout << find(0) << endl; // Output: 0
-    cout << find(1) << endl; // Output: 3
-    cout << find(2) << endl; // Output: 3
-    cout << find(3) << endl; // Output: 3
-    cout << find(4) << endl; // Output: 4
-
+    initialize(8);
+    cout << find(1) << endl;
+    dsu_union(1,5);
+    cout << find(1) << endl;
+    
     return 0;
 }
