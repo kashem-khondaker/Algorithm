@@ -28,7 +28,6 @@ void dsu_union_by_size(int node1 , int node2)
 {
     int leader1 = dsu_find(node1);
     int leader2 = dsu_find(node2);
-
     if (group_size[leader1] > group_size[leader2])
     {
         parent[leader2] = leader1;
@@ -40,34 +39,52 @@ void dsu_union_by_size(int node1 , int node2)
         group_size[leader2] += leader1;
     }
 }
+
+class Edge
+{
+    public:
+    int u , v ,w;
+    Edge(int u ,int v ,int w )
+    {
+        this->u = u ;
+        this->v = v;
+        this->w = w;
+    }
+};
+
+bool cmp(Edge a , Edge b)
+{
+    return (a.w < b.w);
+}
 int main()
 {
     int n , e;
     cin >> n >> e;
     initialize(n);
-    bool cycle = false;
+    vector<Edge> edgelist;
     while (e--)
     {
-        int a , b;
-        cin >> a >> b;
-        int leader1 = dsu_find(a);
-        int leader2 = dsu_find(b);
-        if (leader1 == leader2)
+        int u , v, w;
+        cin >> u >> v >> w;
+        edgelist.push_back(Edge(u,v,w));
+    }
+
+    sort(edgelist.begin(),edgelist.end(),cmp);
+    int totalcost = 0;
+    for(Edge ed : edgelist)
+    {
+        int leaderU = dsu_find(ed.u);
+        int leaderV = dsu_find(ed.v);
+        if (leaderU == leaderV)
         {
-            cycle = true;
+            continue;
         }
         else
         {
-            dsu_union_by_size(a , b);
+            dsu_union_by_size(ed.u,ed.v);
+            totalcost += ed.w;
         }
     }
-    if (cycle)
-    {
-        cout << "cycle detected! mother fucker" << endl;
-    }
-    else
-    {
-        cout << "Not detected " << endl;
-    }
+    cout << totalcost << endl;
     return 0;
 }
