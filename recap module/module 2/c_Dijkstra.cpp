@@ -64,11 +64,17 @@ int main() {
         x = par[x];
     }
     reverse(path.begin(), path.end());
-    for (int  i : path)
+    if (dis[n] == 1e18)
     {
-        cout << i << " ";
+        cout << "-1" << endl;
     }
-    
+    else
+    {
+        for (int  i : path)
+        {
+            cout << i << " ";
+        }
+    }
     
     return 0;
 }
