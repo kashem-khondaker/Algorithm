@@ -6,7 +6,6 @@ const int N = 1e5 + 5;
 int parent[N];
 int group_size[N];
 
-
 void dsu_initialize(int n)
 {
     for (int i = 0; i < n; i++)
@@ -16,7 +15,6 @@ void dsu_initialize(int n)
     }
 }
 
-
 int dsu_find(int node)
 {
     if (parent[node] == -1)
@@ -25,7 +23,6 @@ int dsu_find(int node)
     parent[node] = leader;
     return leader;
 }
-
 
 void dsu_union_by_size(int node1, int node2)
 {
@@ -55,15 +52,10 @@ public:
     }
 };
 
-
 bool cmp(Edge a, Edge b)
 {
     return a.w < b.w;
 }
-
-
-
-
 
 int main()
 {
