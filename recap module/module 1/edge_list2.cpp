@@ -37,7 +37,6 @@ int main()
         }
         
     }
-    
 
     for (edge edgelist :  v)
     {
