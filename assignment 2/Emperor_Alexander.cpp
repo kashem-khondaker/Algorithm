@@ -97,15 +97,15 @@ int main()
     }
     
     
-    if (totalEdge != n - 1) 
-    {
-        cout << "Not Possible" << endl;
-    } 
-    else 
-    {
-        ll rode = e - totalEdge;
-        cout << rode << " " << totalCost << endl;
-    }
+    // if (totalEdge != n - 1) 
+    // {
+    //     cout << "Not Possible" << endl;
+    // } 
+    // else 
+    // {
+    //     ll rode = e - totalEdge;
+    //     cout << rode << " " << totalCost << endl;
+    // }
     
     return 0;
 }
