@@ -2,7 +2,9 @@
 #define ll long long 
 using namespace std;
 
-const int N = 1e5+5;
+//top dowm approce ;
+
+const ll N = 1e5+5;
 ll dp[N];
 ll fibo(ll n)
 {
