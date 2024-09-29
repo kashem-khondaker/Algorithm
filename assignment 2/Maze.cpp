@@ -25,7 +25,8 @@ void bfs(int si, int sj)
         pair<int, int> node = q.front();
         q.pop();
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++) 
+        {
             int ci = node.first + d[i].first;
             int cj = node.second + d[i].second;
 
@@ -39,7 +40,8 @@ void bfs(int si, int sj)
     }
 }
 
-int main() {
+int main() 
+{
     cin >> n >> m;
     int si, sj, di, dj;
 
@@ -59,21 +61,6 @@ int main() {
                 dj = j;
             }
         }
-    }
-
-   
-    if (si == di && sj == dj) 
-    {
-        for (int i = 0; i < n; i++) 
-        {
-            for (int j = 0; j < m; j++) 
-            {
-                cout << mart[i][j];
-            }
-            cout << endl;
-        }
-        return 0; 
-        
     }
 
     memset(vis, false, sizeof(vis));
@@ -99,12 +86,6 @@ int main() {
                 mart[xi][xj] = 'X';
             }
 
-            
-            if (par.find({xi, xj}) == par.end()) 
-            {
-                break; 
-            }
-
             int newxi = par[{xi, xj}].first;  
             int newxj = par[{xi, xj}].second;
 
@@ -112,7 +93,6 @@ int main() {
             xj = newxj;  
         }
     }
-
     
     for (int i = 0; i < n; i++) 
     {
